@@ -1,81 +1,9 @@
 {
-    "auth": {
-     "rolesSource": "/api/GetRoles",
-     "identityProviders": {
-       "customOpenIdConnectProviders": {
-         "auth0": {
-           "registration": {
-             "clientIdSettingName": "Auth0ClientId",
-             "clientCredential": {
-               "clientSecretSettingName": "Auth0ClientSecret"
-             },
-             "openIdConnectConfiguration": {
-               "wellKnownOpenIdConfiguration": "{wellKnownOpenIdConfiguration}"
-             }
-           },
-           "login": {
-             "nameClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
-             "scopes": [
-               "openid",
-               "profile",
-               "email"
-             ]
-           }
-         }
-       }
-     }
-    },
-    "routes": [
-     {
-       "route": "/login",
-       "rewrite": "/.auth/login/auth0",
-       "allowedRoles": [
-         "anonymous",
-         "authenticated"
-       ]
-     },
-     {
-       "route": "/logout",
-       "redirect": "/.auth/logout",
-       "allowedRoles": [
-         "anonymous",
-         "authenticated"
-       ]
-     },
-     {
-       "route": "/.auth/*",
-       "allowedRoles": [
-         "authenticated"
-       ]
-     },
-     {
-       "route": "/api/*",
-       "allowedRoles": [
-         "authenticated"
-       ]
-     },
-     {
-       "route": "/*",
-       "allowedRoles": [
-         "authenticated"
-       ]
-     }
-    ],
     "navigationFallback": {
-     "rewrite": "index.html"
-    },
-    "responseOverrides": {
-     "404": {
-       "rewrite": "/custom_404.html",
-       "statusCode": 200
-     },
-     "400": {
-       "rewrite": "/invalid-invitation-error.html"
-     },
-     "401": {
-       "redirect": "/.auth/login/auth0?post_login_redirect_uri=.referrer",
-       "statusCode": 302
-     }
+        "rewrite": "/index.html",
+        "exclude": [
+            "/images/*.{png,jpg,gif}",
+            "/css/*"
+        ]
     }
-  }
- 
+}
